@@ -1,0 +1,33 @@
+<div class='row justify-content-md-center'>
+  <h1 class='col-auto'>
+    Sign up
+  </h1>
+</div>
+
+<%= form_for(@user, url: user_registration_path(@account)) do |form| %>
+  <%= render 'devise/shared/error_messages', resource: resource %>
+  <div class='row justify-content-md-center'>
+    <div class='col-auto'>
+      <%= form.label :email, class: 'col-form-label' %>
+      <%= form.text_field :email, class: 'form-control' %>
+    </div>
+  </div>
+  <div class='row justify-content-md-center mb-3'>
+    <div class='col-auto'>
+      <%= form.label "Password (#{@minimum_password_length} characters min)", class: 'col-form-label' %>
+      <%= form.password_field 'password', class: 'form-control' %>
+    </div>
+  </div>
+  <div class='row justify-content-md-center mb-3'>
+    <div class='col-auto'>
+      <%= form.label :password_confirmation, class: 'col-form-label' %>
+      <%= form.password_field 'password_confirmation', class: 'form-control' %>
+    </div>
+  </div>
+  <div class='row justify-content-md-center'>
+    <div class='col-auto'>
+      <%= form.submit 'Sign up', class: 'btn btn-success' %>
+      <%= render 'devise/shared/links' %>
+    </div>
+  </div>
+<% end %>

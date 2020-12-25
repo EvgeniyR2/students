@@ -1,0 +1,60 @@
+<%= form_with(model: @student, local: true) do |form| %>
+  <% if @student && @student.errors.any? %>
+    <div class='row'>
+      <div class='col mt-3'>
+        <div class='alert alert-danger' role='alert'>
+          <h2><%= pluralize(@student.errors.count, 'error') %> prohibited this from being saved:</h2>
+          <ul>
+            <% @student.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class='row'>
+    <div class='col-lg-4 mb-3'>
+      <div class='field form-group'>
+        <%= form.label :last_name, class: 'col-form-label' %>
+        <%= form.text_field :last_name, class: 'form-control' %>
+      </div>
+    </div>
+    <div class='col-lg-4 mb-3'>
+      <div class='field form-group'>
+        <%= form.label :first_name, class: 'col-form-label' %>
+        <%= form.text_field :first_name, class: 'form-control' %>
+      </div>
+    </div>
+    <div class='col-lg-4 mb-3'>
+      <div class='field form-group'>
+        <%= form.label :middle_name, class: 'col-form-label' %>
+        <%= form.text_field :middle_name, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-lg-2 mb-3'>
+      <div class='field form-group'>
+        <%= form.label :gender, 'Gender', class: 'col-form-label' %>
+        <%= form.select :gender, Student::GENDERS, { include_blank: true }, { class: 'form-control' } %>
+      </div>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-lg-4 mb-3'>
+      <div class='field form-group'>
+        <%= form.label :identifier, class: 'col-form-label' %>
+        <%= form.text_field :identifier, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <div class='action form-group'>
+    <%= form.submit class: 'btn btn-success' %>
+    <%= link_to 'Cancel', students_path, class: 'btn btn-secondary' %>
+  </div>
+<% end %>

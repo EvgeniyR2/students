@@ -1,0 +1,56 @@
+<div class='row mb-3 mt-3'>
+  <div class='col'>
+    <%= link_to 'Add student', new_student_path, class: 'btn btn-success' %>
+  </div>
+  <div class='col'>
+    Number of students: <%= @students_count %>
+  </div>
+</div>
+
+<%= form_with(url: students_path, method: 'GET', local: true, class: 'form-group') do |form| %>
+  <div class='row'>
+    <div class='col-lg-6'>
+      <div class='input-group'>
+        <%= form.text_field :filter, class: 'form-control', placeholder: 'Filter...', value: params[:filter] %>
+        <span class='mdi mdi-magnify'></span>
+        <div class='input-group-append'>
+          <%= form.submit 'Filter', class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+    <div class='col-lg-6'>
+      <div class='input-group mb-3'>
+        <div class='input-group-prepend'>
+          <label class='input-group-text'>Sort</label>
+        </div>
+
+        <%= form.select :sort, options_for_select(Student::SORTING.keys, params[:sort]),{}, { onchange: "window.location='/students?sort=' + this.value", class: 'custom-select'} %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class='table-responsive'>
+  <table class='table table-sm table-centered table-striped dt-responsive nowrap w-100'>
+    <thead>
+      <tr>
+        <th>Full name</th>
+        <th>Gender</th>
+        <th>Identifier</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @students.each do |student| %>
+        <tr>
+          <td><%= link_to student.full_name, edit_student_path(id: student.id) %></td>
+          <td><%= student.gender %></td>
+          <td><%= student.identifier %></td>
+          <td>
+            <%= link_to 'Remove', student_path(student), method: :delete,  data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

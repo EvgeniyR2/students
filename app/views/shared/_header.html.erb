@@ -1,0 +1,9 @@
+<% if current_user %>
+  <nav class='navbar navbar-light bg-light'>
+    <a class='navbar-brand'>Students</a>
+    <form class='form-inline'>
+      <%= current_user.email %> &nbsp;
+      <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+    </form>
+  </nav>
+<% end %>
